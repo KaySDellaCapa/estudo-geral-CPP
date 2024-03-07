@@ -1,0 +1,79 @@
+#include <iostream>
+
+class Casa
+{
+
+	// Atributos e propriedades da classe, representados por variaveis. Caracteristicas de cada objeto criado a partir da classe.
+
+// Por padrão a visibilidade é private, precisa ser indicada o tipo que ela é
+private:
+	// Só poderão ser acessados diretamente no classe Casa, fora não
+	int NumQuartos{ 4 };
+	float Tamanho{ 90.0f };
+
+	// No geral se coloca o "b" na frente de variaveis booleanas
+	bool bTemSuite{ true };
+
+// Estará acessivel fora do escopo da classe
+public:
+	// Operações da classe. Poderá ser executado quando for criado(instanciado) a partir desta classe
+	void MostrarTamanho();
+	int ObtenhaNumeroDeQuartos();
+	bool TemSuite();
+
+	// Melhor criar um metodo para que seja alterado o numero de quartos seguindo a regra que será estabelecida
+	void SetNumQuartos(int Num);
+
+
+}; // Código da classe
+
+int main()
+{
+	// Declara variaveis, tambem declara variaveis tenhdo um tipo de classe; a memoria cria uma região com esse nome que aponta para o objeto
+	Casa CasaDePraia;
+
+	// Esses são possiveis acessar pois são publicos
+	CasaDePraia.MostrarTamanho();
+
+	// Para acessar os membros da classe Casa usamos neste caso a notação ponto.
+	std::cout << "\n Quartos:" << CasaDePraia.ObtenhaNumeroDeQuartos();
+
+	// Se for true, vai para sim. Se for false, vai para não
+	std::cout << "\n Tem suite:" << CasaDePraia.TemSuite() ? (std::cout << "Sim") : (std::cout << "Não") << "\n";
+
+	// Se for maior 1ue 6 dá um num invalido. Isso foi arrumado internamente
+	CasaDePraia.SetNumQuartos(1000);
+
+	system("PAUSE");
+	return 0;
+
+}
+
+// O operador escopo neste caso indica que o método (função) MostrarTamanho() pertence a classe Casa
+void Casa::MostrarTamanho()
+{
+	std::cout << "\nTamanho: " << Tamanho;
+}
+
+int Casa::ObtenhaNumeroDeQuartos()
+{
+	return NumQuartos;
+}
+
+bool Casa::TemSuite()
+{
+	return bTemSuite;
+}
+
+// Tratou da regra internamente
+void Casa::SetNumQuartos(int Num)
+{
+	if ((Num <= 6) && (Num >= 0))
+	{
+		NumQuartos = Num;
+	} 
+	else
+	{
+		std::cout << "\nNum de Quartos Invalidos\n";
+	}
+}
